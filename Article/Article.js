@@ -85,6 +85,14 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  { title: 'Breaking News: The Chicken Comes Before The Egg', 
+  date: 'Oct 31st, 2019', 
+  firstParagraph: 'Yada yada yada why this?',
+
+  secondParagraph: 'I knew it! said the fox.',
+
+  thirdParagraph:'Looks like meat is back on the menu boys, said the wolf.' 
   }
 ];
 
@@ -112,3 +120,44 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+// Step 1// grab the parent element to append our data to// define functional component here
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+ // define new elements
+ const article2 = document.createElement('div');
+ const aheading = document.createElement('h2');
+ const date1 = document.createElement('p');
+ const paragraph1 = document.createElement('p');
+ const paragraph2 = document.createElement('p');
+ const paragraph3 = document.createElement('p'); const expandButton = document.createElement('button');
+ const buttonPanel = document.createElement('span');
+ const buttonOpen = document.createElement('button');
+ // setup structure of elements
+ article2.appendChild(aheading);
+ article2.appendChild(date1);
+ article2.appendChild(paragraph1);
+ article2.appendChild(paragraph2);
+ article2.appendChild(paragraph3); article2.appendChild(expandButton);
+ article2.appendChild(buttonPanel);
+ buttonPanel.appendChild(buttonOpen);
+ //set class names
+ article2.classList.add('.article')
+ date1.classList.add('.date') 
+ expandButton.classList.add('.expandButton')
+ buttonPanel.classList.add('.expandButton');
+ buttonOpen.classList.add('.panel-btn-open')
+ // set text content
+ aheading.textContent = title;
+ date1.textContent = date;
+ paragraph1.textContent = firstParagraph;
+ paragraph2.textContent = secondParagraph;
+ paragraph3.textContent = thirdParagraph;
+ buttonOpen.textContent = '\u25bc';
+ buttonPanel.addEventListener('click', () => { article2.classList.toggle('article-open'); });
+ return article2
+}
+const articles = document.querySelector('.articles')
+// we looped through the data and created panels for each content and title
+data.forEach(data => {
+ const div = createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph);
+ articles.appendChild(div);
+});
